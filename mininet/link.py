@@ -224,7 +224,7 @@ class TCIntf( Intf ):
 
     # The parameters we use seem to work reasonably up to 1 Gb/sec
     # For higher data rates, we will probably need to change them.
-    bwParamMax = 1000
+    bwParamMax = 100000
 
     def bwCmds( self, bw=None, speedup=0, use_hfsc=False, use_tbf=False,
                 latency_ms=None, enable_ecn=False, enable_red=False ):
@@ -293,7 +293,7 @@ class TCIntf( Intf ):
             netemargs = '%s%s%s%s' % (
                 'delay %s ' % delay if delay is not None else '',
                 '%s ' % jitter if jitter is not None else '',
-                'loss %d ' % loss if loss is not None else '',
+                'loss %.4f ' % loss if loss is not None else '',
                 'limit %d' % max_queue_size if max_queue_size is not None
                 else '' )
             if netemargs:
@@ -353,7 +353,7 @@ class TCIntf( Intf ):
         stuff = ( ( [ '%.2fMbit' % bw ] if bw is not None else [] ) +
                   ( [ '%s delay' % delay ] if delay is not None else [] ) +
                   ( [ '%s jitter' % jitter ] if jitter is not None else [] ) +
-                  ( ['%d%% loss' % loss ] if loss is not None else [] ) +
+                  ( ['%.4f%% loss' % loss ] if loss is not None else [] ) +
                   ( [ 'ECN' ] if enable_ecn else [ 'RED' ]
                     if enable_red else [] ) )
         info( '(' + ' '.join( stuff ) + ') ' )
