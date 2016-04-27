@@ -870,7 +870,7 @@ class Mininet( object ):
         if cls.inited:
             return
         ensureRoot()
-        fixLimits()
+        #fixLimits()
         cls.inited = True
 
 
